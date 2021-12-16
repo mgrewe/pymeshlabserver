@@ -31,8 +31,6 @@ if args.m is not None:
     if 'wt' in m:
         save_options['wt'] = True
 
-print(save_options)
-
 ms = pymeshlab.MeshSet()
 for i in input_files:
     ms.load_new_mesh(i)
