@@ -19,15 +19,23 @@ save_options = {'vc': False,
 # print(args.i)
 if args.i is not None:
     input_files = [i[0] for i in args.i]
+else:
+    input_files = []
 if args.o is not None:
     output_files = [o[0] for o in args.o]
+else:
+    output_files = []
 if args.s is not None:
     filter_scripts = [s[0] for s in args.s]
+else:
+    filter_scripts=[]
 if args.l is not None:
     save_layer = int(args.l[0])
 else:
-    save_layer = 0
-    
+    save_layer = -1
+
+print(save_layer)
+
 if args.m is not None:
     m = [m[0] for m in args.m]
     if 'vc' in m:
@@ -44,7 +52,8 @@ for f in filter_scripts:
     ms.load_filter_script(f)
     ms.apply_filter_script()
 for o in output_files:
-    ms.set_current_mesh(save_layer)
+    if save_layer != -1:
+        ms.set_current_mesh(save_layer)
     ms.save_current_mesh(o, 
     save_vertex_coord = save_options['vt'], 
     save_vertex_color = save_options['vc'],
