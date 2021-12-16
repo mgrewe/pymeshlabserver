@@ -8,6 +8,7 @@ parser.add_argument('-i', nargs='+', action='append', help='input files.')
 parser.add_argument('-o', nargs='+', action='append', help='output files.')
 parser.add_argument('-s', nargs='+', action='append', help='filter scripts.')
 parser.add_argument('-m', nargs='+', action='append', help='output mesh\'s attributes.')
+parser.add_argument('-l', help='select layer before saving.')
 
 args = parser.parse_args()
 
@@ -22,6 +23,11 @@ if args.o is not None:
     output_files = [o[0] for o in args.o]
 if args.s is not None:
     filter_scripts = [s[0] for s in args.s]
+if args.l is not None:
+    save_layer = int(args.l[0])
+else:
+    save_layer = 0
+    
 if args.m is not None:
     m = [m[0] for m in args.m]
     if 'vc' in m:
@@ -40,7 +46,7 @@ for f in filter_scripts:
     ms.load_filter_script(f)
     ms.apply_filter_script()
 for o in output_files:
-    
+    ms.set_current_mesh(save_layer)
     ms.save_current_mesh(o, 
     save_vertex_coord = save_options['vt'], 
     save_vertex_color = save_options['vc'],
