@@ -34,8 +34,6 @@ if args.l is not None:
 else:
     save_layer = -1
 
-print(save_layer)
-
 if args.m is not None:
     m = [m[0] for m in args.m]
     if 'vc' in m:
