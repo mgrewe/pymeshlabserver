@@ -46,9 +46,13 @@ if args.m is not None:
 ms = pymeshlab.MeshSet()
 for i in input_files:
     ms.load_new_mesh(i)
+
+ms.set_verbosity(True)
 for f in filter_scripts:
     ms.load_filter_script(f)
     ms.apply_filter_script()
+ms.set_verbosity(False)
+
 for idx, o in enumerate(output_files):
     if save_layer != -1:
         ms.set_current_mesh(int(save_layer[idx]))
